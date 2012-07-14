@@ -1,5 +1,8 @@
 package com.yatayat.android;
-
+/**
+ * @author         prayag
+ * @created_date   15th July 2012 
+ */
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
