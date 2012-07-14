@@ -24,22 +24,15 @@ import android.util.Log;
  * @filename JsonParser.java
  */
 public class JsonParser {
-	String url;
-	public static String result = "";
+	public static String result = null;
 
-	// ="[{\"status\":\"success\"}]";
-	public JsonParser(String url) {
-		this.url = url;
-	}
-
-	public void parseJSON() {
-		// String result="";
+	public static String parseJSON(String URL) {
 		InputStream is = null;
 
 		try {
 			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 			HttpClient httpclient = new DefaultHttpClient();
-			HttpPost httppost = new HttpPost(url);
+			HttpPost httppost = new HttpPost(URL);
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 			HttpResponse response = httpclient.execute(httppost);
 			HttpEntity entity = response.getEntity();
@@ -61,5 +54,6 @@ public class JsonParser {
 		} catch (Exception e) {
 			Log.e("log_tag", "Error converting result." + e.toString());
 		}
+		return result;
 	}
 }
