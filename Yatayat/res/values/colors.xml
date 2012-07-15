@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+	Created On: July 14
+	Contributor: Samrakchan Ghimire
+ -->
+
+<resources>
+    <color name="app_color">#03c9e6</color>
+    <color name="bg">#ffffff</color>
+    
+    <color name="white">#ffffff</color>
+    
+    <!-- Action Bar -->
+    <color name="lightBlue">#4dd6ea</color>
+    <color name="mediumBlue">#03c9e6</color>
+    <color name="darkBlue">#20b8ce</color>
+</resources>

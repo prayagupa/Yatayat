@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+  <RelativeLayout
+        android:id="@+id/actionbar_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="40sp"
+        android:background="@drawable/actionbar"
+        android:layout_alignParentTop="true" >
+
+      <TextView
+          android:id="@+id/actionbar_tv"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerHorizontal="true"
+          android:layout_centerVertical="true"
+          android:text="@string/app_name"
+          android:textColor="@color/white"
+          android:textSize="18sp"
+          style="@style/shadow_onthe_up_text"/>
+
+    </RelativeLayout>
+</merge>
