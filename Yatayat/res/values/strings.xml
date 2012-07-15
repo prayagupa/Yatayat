@@ -1,8 +1,19 @@
 <resources>
-
+	<!-- 
+    Created On: 14th July
+    Contribution: Samrakchan Ghimire,
+    Version 1.0
+     -->
     <string name="app_name">Yatayat</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_yatayat">Yatayat</string>
+    
+    <string name="start_point">Start From\:</string>
+    <string name="end_point">Destination\:</string>
+    
+    <string name="find_vehicle">Find Vehicle</string>
+    
+    <string name="na"></string>
 
 </resources>

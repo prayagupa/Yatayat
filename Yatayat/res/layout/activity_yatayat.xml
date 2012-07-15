@@ -4,13 +4,73 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
+    <!-- 
+    Created On: 14th July
+    Contribution: Samrakchan Ghimire,
+    Version 1.0
+     -->
+    
     <include android:id="@+id/actionbar" layout="@layout/merge_actionbar" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/padding_medium"
-        android:text="@string/hello_world"
-        tools:context=".YatayatActivity" />
+    
+    <ScrollView android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+	    
+	    <LinearLayout 
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical"
+	        android:padding="3dp">
+	                
+		    <TextView
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="@string/start_point"
+		        tools:context=".YatayatActivity"
+		        android:layout_marginTop="2dp"
+		        android:maxWidth="200dp" 
+		         />
+		    
+		
+		    <EditText
+		        android:id="@+id/start_point_et"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:ems="10"
+		        android:layout_marginTop="2dp"
+		        android:maxWidth="200dp"
+		        android:hint="@string/na" >
+		
+		        <requestFocus />
+		    </EditText>
+		    
+		    <TextView
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="@string/end_point"
+		        tools:context=".YatayatActivity"
+		        android:layout_marginTop="2dp"
+		        android:maxWidth="200dp" />
+		    
+		    <EditText
+		        android:id="@+id/end_point_et"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:ems="10"
+		        android:layout_marginTop="2dp"
+		        android:maxWidth="200dp"
+		        android:hint="@string/na" >
+		    </EditText>
+		
+		    <Button
+		        android:id="@+id/find_vehicle_b"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:text="@string/find_vehicle"
+		        android:layout_marginTop="2dp"
+		        android:maxWidth="200dp"
+		        style="@style/Button" />
+	    
+	    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

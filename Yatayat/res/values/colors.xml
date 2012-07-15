@@ -2,6 +2,7 @@
 <!-- 
 	Created On: July 14
 	Contributor: Samrakchan Ghimire
+	Version: 1.0
  -->
 
 <resources>
@@ -9,9 +10,19 @@
     <color name="bg">#ffffff</color>
     
     <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
     
-    <!-- Action Bar -->
+    <!-- Action Bar and Buttons -->
     <color name="lightBlue">#4dd6ea</color>
     <color name="mediumBlue">#03c9e6</color>
     <color name="darkBlue">#20b8ce</color>
+    
+    <color name="button_text">#474746</color>
+
+    <color name="button_border">#c2d1d3</color>
+    <color name="button_border_selected">#f3fe4b</color>
+    
+    <color name="lightBgButton">#fafafa</color>
+    <color name="mediumBgButton">#e6e7e4</color>
+    <color name="darkBgButton">#d4d6d1</color>
 </resources>
