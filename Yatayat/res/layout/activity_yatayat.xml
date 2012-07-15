@@ -29,19 +29,15 @@
 		        android:layout_marginTop="2dp"
 		        android:maxWidth="200dp" 
 		         />
-		    
 		
-		    <EditText
+		    <AutoCompleteTextView
 		        android:id="@+id/start_point_et"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:ems="10"
 		        android:layout_marginTop="2dp"
 		        android:maxWidth="200dp"
-		        android:hint="@string/na" >
-		
-		        <requestFocus />
-		    </EditText>
+		        android:hint="@string/na" />
 		    
 		    <TextView
 		        android:layout_width="wrap_content"
@@ -51,15 +47,14 @@
 		        android:layout_marginTop="2dp"
 		        android:maxWidth="200dp" />
 		    
-		    <EditText
+		    <AutoCompleteTextView
 		        android:id="@+id/end_point_et"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:ems="10"
 		        android:layout_marginTop="2dp"
 		        android:maxWidth="200dp"
-		        android:hint="@string/na" >
-		    </EditText>
+		        android:hint="@string/na" />
 		
 		    <Button
 		        android:id="@+id/find_vehicle_b"

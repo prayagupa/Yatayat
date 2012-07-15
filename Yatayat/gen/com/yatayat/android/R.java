@@ -58,6 +58,12 @@ public final class R {
         public static final int activity_yatayat=0x7f080000;
     }
     public static final class string {
+        /**  
+    Created On: 14th July
+    Contribution: Samrakchan Ghimire,
+    Version 1.0
+     
+         */
         public static final int app_name=0x7f060000;
         public static final int end_point=0x7f060005;
         public static final int find_vehicle=0x7f060006;
@@ -68,6 +74,12 @@ public final class R {
         public static final int title_activity_yatayat=0x7f060003;
     }
     public static final class style {
+        /**  
+    Created On: 14th July
+    Contribution: Samrakchan Ghimire,
+    Version 1.0
+     
+         */
         public static final int AppTheme=0x7f070000;
         public static final int Button=0x7f070003;
         public static final int logo_text=0x7f070001;
