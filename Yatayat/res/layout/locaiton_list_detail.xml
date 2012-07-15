@@ -6,7 +6,8 @@
     android:paddingTop="7dp"
     android:paddingBottom="7dp"
     android:paddingRight="4dp"
-    android:paddingLeft="4dp" >
+    android:paddingLeft="4dp"
+ >
 
     <TextView
         android:id="@+id/location_list_detail_tv"

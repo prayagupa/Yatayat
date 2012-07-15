@@ -6,10 +6,13 @@ package com.yatayat.android;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.widget.ArrayAdapter;
 import android.widget.MultiAutoCompleteTextView;
 
 public class YatayatActivity extends Activity {
+	
 	private MultiAutoCompleteTextView startPoint, endPoint;
+	public static String[] places = {"kupondol", "kalimati", "kamaladi", "jawalkhel", "yakunta kuna"};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -18,6 +21,12 @@ public class YatayatActivity extends Activity {
         
         startPoint = (MultiAutoCompleteTextView)findViewById(R.id.start_point_et);
         endPoint = (MultiAutoCompleteTextView)findViewById(R.id.end_point_et);
+        
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_dropdown_item_1line, places);
+        startPoint.setAdapter(adapter);
+        startPoint.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+        endPoint.setAdapter(adapter);
+        endPoint.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
     }
 
     @Override
