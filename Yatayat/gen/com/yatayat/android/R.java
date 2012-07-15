@@ -42,17 +42,21 @@ public final class R {
         public static final int logo_actionbar=0x7f020006;
     }
     public static final class id {
-        public static final int actionbar=0x7f090000;
-        public static final int actionbar_rl=0x7f090004;
-        public static final int actionbar_tv=0x7f090005;
-        public static final int end_point_et=0x7f090002;
-        public static final int find_vehicle_b=0x7f090003;
-        public static final int menu_settings=0x7f090006;
-        public static final int start_point_et=0x7f090001;
+        public static final int actionbar=0x7f090001;
+        public static final int actionbar_ll=0x7f090000;
+        public static final int actionbar_rl=0x7f090007;
+        public static final int actionbar_tv=0x7f090008;
+        public static final int end_point_et=0x7f090004;
+        public static final int find_vehicle_b=0x7f090005;
+        public static final int location_list_detail_tv=0x7f090006;
+        public static final int main_sv=0x7f090002;
+        public static final int menu_settings=0x7f090009;
+        public static final int start_point_et=0x7f090003;
     }
     public static final class layout {
         public static final int activity_yatayat=0x7f030000;
-        public static final int merge_actionbar=0x7f030001;
+        public static final int locaiton_list_detail=0x7f030001;
+        public static final int merge_actionbar=0x7f030002;
     }
     public static final class menu {
         public static final int activity_yatayat=0x7f080000;

@@ -1,25 +1,33 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_height="match_parent" >
     
     <!-- 
     Created On: 14th July
     Contribution: Samrakchan Ghimire,
     Version 1.0
      -->
+    <LinearLayout 
+        android:id="@+id/actionbar_ll"
+        android:layout_alignParentTop="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+    	<include android:id="@+id/actionbar" layout="@layout/merge_actionbar" />
+    </LinearLayout>
     
-    <include android:id="@+id/actionbar" layout="@layout/merge_actionbar" />
-    
-    <ScrollView android:layout_width="fill_parent"
+    <ScrollView
+        android:id="@+id/main_sv"
+        android:layout_below="@+id/actionbar_ll"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 	    
 	    <LinearLayout 
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
 	        android:orientation="vertical"
-	        android:padding="3dp">
+	        android:padding="3dp"
+	        >
 	                
 		    <TextView
 		        android:layout_width="wrap_content"
@@ -30,7 +38,7 @@
 		        android:maxWidth="200dp" 
 		         />
 		
-		    <AutoCompleteTextView
+		    <MultiAutoCompleteTextView
 		        android:id="@+id/start_point_et"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
@@ -39,7 +47,8 @@
 		        android:maxWidth="200dp"
 		        android:hint="@string/na"
 		        android:lines="1"
-		        android:singleLine="1" />
+		        android:singleLine="true"
+		        android:completionThreshold="1"  />
 		    
 		    <TextView
 		        android:layout_width="wrap_content"
@@ -49,7 +58,7 @@
 		        android:layout_marginTop="2dp"
 		        android:maxWidth="200dp" />
 		    
-		    <AutoCompleteTextView
+		    <MultiAutoCompleteTextView
 		        android:id="@+id/end_point_et"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
@@ -58,8 +67,9 @@
 		        android:maxWidth="200dp"
 		        android:hint="@string/na"
 		        android:lines="1"
-		        android:singleLine="1" />
-		
+		        android:singleLine="true"
+		        android:completionThreshold="1" />
+		    	
 		    <Button
 		        android:id="@+id/find_vehicle_b"
 		        android:layout_width="fill_parent"
@@ -72,4 +82,4 @@
 	    </LinearLayout>
     </ScrollView>
 
-</LinearLayout>
+</RelativeLayout>
