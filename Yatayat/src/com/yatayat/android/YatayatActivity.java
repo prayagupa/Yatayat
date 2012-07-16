@@ -1,48 +1,99 @@
 package com.yatayat.android;
+
 /**
  * @author         prayag
  * @created_date   15th July 2012 
  */
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ScrollView;
 
+import com.yatayat.android.models.Stop;
+import com.yatayat.android.service.YatayatService;
+import com.yatayat.android.utils.YatayatUtility;
+import com.yatayat.android.widgets.StopArrayAdaptor;
+
 public class YatayatActivity extends Activity {
-	
+
 	private AutoCompleteTextView startPoint, endPoint;
 	private ScrollView mainSV, noInternetSV;
-	public static String[] places = {"kupondol", "kalimati", "kamaladi", "jawalkhel", "yakunta kuna"};
+	private List<Stop> stopsList;
+	private StopArrayAdaptor arrayAdaptor;
+	public static String[] places = { "kupondol", "kalimati", "kamaladi",
+			"jawalkhel", "yakunta kuna" };
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_yatayat);
-        
-        //if YES connection
-        if(true){
-        	mainSV = (ScrollView) findViewById(R.id.main_sv);
-        	mainSV.setVisibility(View.VISIBLE);
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_yatayat);
 
-            startPoint = (AutoCompleteTextView)findViewById(R.id.start_point_et);
-            endPoint = (AutoCompleteTextView)findViewById(R.id.end_point_et);
-            
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_dropdown_item_1line, places);
-            startPoint.setAdapter(adapter);
-            endPoint.setAdapter(adapter);
-        }else{
-        	mainSV = (ScrollView)findViewById(R.id.no_internet_sv);
-        	mainSV.setVisibility(View.VISIBLE);
-        }
-        
-    }
+		stopsList = new ArrayList<Stop>();
+		// if YES connection
+		if (YatayatUtility.checkInternetConnection(this)) {
+			// progressBar = (ProgressBar)
+			// findViewById(R.id.general_progress_wheel);
+			// progressBar.setVisibility(View.VISIBLE);
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_yatayat, menu);
-        return true;
-    }
+			mainSV = (ScrollView) findViewById(R.id.main_sv);
+			mainSV.setVisibility(View.VISIBLE);
+
+			startPoint = (AutoCompleteTextView) findViewById(R.id.start_point_et);
+			endPoint = (AutoCompleteTextView) findViewById(R.id.end_point_et);
+			arrayAdaptor = new StopArrayAdaptor(this, stopsList);
+			/*
+			 * ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+			 * getApplicationContext(),
+			 * android.R.layout.simple_dropdown_item_1line, places);
+			 */
+			startPoint.setAdapter(arrayAdaptor);
+			endPoint.setAdapter(arrayAdaptor);
+
+			Thread thread = new Thread(null, loadStops);
+			thread.start();
+		} else {
+			mainSV = (ScrollView) findViewById(R.id.no_internet_sv);
+			mainSV.setVisibility(View.VISIBLE);
+		}
+
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.activity_yatayat, menu);
+		return true;
+	}
+
+	private final Runnable loadStops = new Runnable() {
+
+		@Override
+		public void run() {
+			stopsList = YatayatService.getAllStops();
+
+			runOnUiThread(returnResponse);
+		}
+	};
+	private final Runnable returnResponse = new Runnable() {
+
+		@Override
+		public void run() {
+			// VISIBILITY OF SCROLL VIEW loading_sv YES
+			if (stopsList != null && stopsList.size() > 0) {
+				for (int i = 0; i < stopsList.size(); i++)
+					arrayAdaptor.add(stopsList.get(i));
+			}
+
+			// if (progressBar.getVisibility() == View.VISIBLE) {
+			// progressBar.setVisibility(View.GONE);
+			// }
+			arrayAdaptor.notifyDataSetChanged();
+
+		}
+	};
+
 }
