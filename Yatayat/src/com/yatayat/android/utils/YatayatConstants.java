@@ -9,5 +9,6 @@ package com.yatayat.android.utils;
  * @filename YatayatConstants.java
  */
 public class YatayatConstants {
+	public static final String ROUTES_LIST_URL = "http://yyapi.monsooncollective.org/";
 	public static final String STOPS_LIST_URL = "http://yyapi.monsooncollective.org/";
 }
