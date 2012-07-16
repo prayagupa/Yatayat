@@ -15,5 +15,6 @@
     <string name="find_vehicle">Find Vehicle</string>
     
     <string name="na"></string>
+    <string name="no_internet">Please connect to internet\!</string>
 
 </resources>

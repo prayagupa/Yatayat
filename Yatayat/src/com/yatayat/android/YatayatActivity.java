@@ -6,12 +6,15 @@ package com.yatayat.android;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.MultiAutoCompleteTextView;
+import android.widget.AutoCompleteTextView;
+import android.widget.ScrollView;
 
 public class YatayatActivity extends Activity {
 	
-	private MultiAutoCompleteTextView startPoint, endPoint;
+	private AutoCompleteTextView startPoint, endPoint;
+	private ScrollView mainSV, noInternetSV;
 	public static String[] places = {"kupondol", "kalimati", "kamaladi", "jawalkhel", "yakunta kuna"};
 
     @Override
@@ -19,14 +22,22 @@ public class YatayatActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_yatayat);
         
-        startPoint = (MultiAutoCompleteTextView)findViewById(R.id.start_point_et);
-        endPoint = (MultiAutoCompleteTextView)findViewById(R.id.end_point_et);
+        //if YES connection
+        if(true){
+        	mainSV = (ScrollView) findViewById(R.id.main_sv);
+        	mainSV.setVisibility(View.VISIBLE);
+
+            startPoint = (AutoCompleteTextView)findViewById(R.id.start_point_et);
+            endPoint = (AutoCompleteTextView)findViewById(R.id.end_point_et);
+            
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_dropdown_item_1line, places);
+            startPoint.setAdapter(adapter);
+            endPoint.setAdapter(adapter);
+        }else{
+        	mainSV = (ScrollView)findViewById(R.id.no_internet_sv);
+        	mainSV.setVisibility(View.VISIBLE);
+        }
         
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_dropdown_item_1line, places);
-        startPoint.setAdapter(adapter);
-        startPoint.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
-        endPoint.setAdapter(adapter);
-        endPoint.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
     }
 
     @Override
@@ -34,6 +45,4 @@ public class YatayatActivity extends Activity {
         getMenuInflater().inflate(R.menu.activity_yatayat, menu);
         return true;
     }
-
-    
 }
