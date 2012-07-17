@@ -24,9 +24,7 @@ public class YatayatActivity extends Activity {
 	private AutoCompleteTextView startPoint, endPoint;
 	private ScrollView mainSV, noInternetSV, progressSV;
 	private List<Stop> stopsList;
-	private StopArrayAdaptor arrayAdaptor;
-	public static String[] places = { "kupondol", "kalimati", "kamaladi",
-			"jawalkhel", "yakunta kuna" };
+	private StopArrayAdaptor stopArrayAdaptor;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -44,10 +42,10 @@ public class YatayatActivity extends Activity {
 
 			startPoint = (AutoCompleteTextView) findViewById(R.id.start_point_et);
 			endPoint = (AutoCompleteTextView) findViewById(R.id.end_point_et);
-			arrayAdaptor = new StopArrayAdaptor(this, stopsList);
+			stopArrayAdaptor = new StopArrayAdaptor(this, stopsList);
 
-			startPoint.setAdapter(arrayAdaptor);
-			endPoint.setAdapter(arrayAdaptor);
+			startPoint.setAdapter(stopArrayAdaptor);
+			endPoint.setAdapter(stopArrayAdaptor);
 
 			Thread thread = new Thread(null, loadStops);
 			thread.start();
@@ -78,15 +76,17 @@ public class YatayatActivity extends Activity {
 		@Override
 		public void run() {
 			if (stopsList != null && stopsList.size() > 0) {
-				for (int i = 0; i < stopsList.size(); i++)
-					arrayAdaptor.add(stopsList.get(i));
+				for (int i = 0; i < stopsList.size(); i++) {
+					stopArrayAdaptor.add(stopsList.get(i));
+				}
 			}
 
 			if (progressSV.getVisibility() == View.VISIBLE) {
 				progressSV.setVisibility(View.GONE);
 				mainSV.setVisibility(View.VISIBLE);
 			}
-			arrayAdaptor.notifyDataSetChanged();
+			stopArrayAdaptor.notifyDataSetChanged();
+			// Log.i("NOTIFIED_TO_ADAPTER", "ADDING_TO_ADAPTER");
 
 		}
 	};
