@@ -22,7 +22,7 @@ import com.yatayat.android.widgets.StopArrayAdaptor;
 public class YatayatActivity extends Activity {
 
 	private AutoCompleteTextView startPoint, endPoint;
-	private ScrollView mainSV, noInternetSV;
+	private ScrollView mainSV, noInternetSV, progressSV;
 	private List<Stop> stopsList;
 	private StopArrayAdaptor arrayAdaptor;
 	public static String[] places = { "kupondol", "kalimati", "kamaladi",
@@ -36,21 +36,16 @@ public class YatayatActivity extends Activity {
 		stopsList = new ArrayList<Stop>();
 		// if YES connection
 		if (YatayatUtility.checkInternetConnection(this)) {
-			// progressBar = (ProgressBar)
-			// findViewById(R.id.general_progress_wheel);
-			// progressBar.setVisibility(View.VISIBLE);
+			progressSV = (ScrollView) findViewById(R.id.loading_sv);
+			progressSV.setVisibility(View.VISIBLE);
 
 			mainSV = (ScrollView) findViewById(R.id.main_sv);
-			mainSV.setVisibility(View.VISIBLE);
+			mainSV.setVisibility(View.GONE);
 
 			startPoint = (AutoCompleteTextView) findViewById(R.id.start_point_et);
 			endPoint = (AutoCompleteTextView) findViewById(R.id.end_point_et);
 			arrayAdaptor = new StopArrayAdaptor(this, stopsList);
-			/*
-			 * ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-			 * getApplicationContext(),
-			 * android.R.layout.simple_dropdown_item_1line, places);
-			 */
+
 			startPoint.setAdapter(arrayAdaptor);
 			endPoint.setAdapter(arrayAdaptor);
 
@@ -73,8 +68,8 @@ public class YatayatActivity extends Activity {
 
 		@Override
 		public void run() {
-			stopsList = YatayatService.getAllStops();
-
+			YatayatService.init();
+			stopsList = YatayatService.getStops();
 			runOnUiThread(returnResponse);
 		}
 	};
@@ -82,15 +77,15 @@ public class YatayatActivity extends Activity {
 
 		@Override
 		public void run() {
-			// VISIBILITY OF SCROLL VIEW loading_sv YES
 			if (stopsList != null && stopsList.size() > 0) {
 				for (int i = 0; i < stopsList.size(); i++)
 					arrayAdaptor.add(stopsList.get(i));
 			}
 
-			// if (progressBar.getVisibility() == View.VISIBLE) {
-			// progressBar.setVisibility(View.GONE);
-			// }
+			if (progressSV.getVisibility() == View.VISIBLE) {
+				progressSV.setVisibility(View.GONE);
+				mainSV.setVisibility(View.VISIBLE);
+			}
 			arrayAdaptor.notifyDataSetChanged();
 
 		}

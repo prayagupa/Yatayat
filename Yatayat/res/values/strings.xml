@@ -16,5 +16,7 @@
     
     <string name="na"></string>
     <string name="no_internet">Please connect to internet\!</string>
+    
+    <string name="main_loading">Loading data from server\.\.\.</string>
 
 </resources>

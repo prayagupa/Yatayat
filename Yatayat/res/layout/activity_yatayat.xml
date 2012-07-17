@@ -44,14 +44,15 @@
 		        android:id="@+id/start_point_et"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
-		        android:ems="10"
 		        android:layout_marginTop="2dp"
-		        android:maxWidth="200dp"
+		        android:completionThreshold="1"
+		        android:ems="10"
 		        android:hint="@string/na"
+		        android:imeOptions="actionNext"
 		        android:lines="1"
+		        android:maxWidth="200dp"
 		        android:singleLine="true"
-		        android:textColor="@color/black"
-		        android:completionThreshold="1"  />
+		        android:textColor="@color/black" />
 		    
 		    <TextView
 		        android:layout_width="wrap_content"
@@ -65,14 +66,15 @@
 		        android:id="@+id/end_point_et"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
-		        android:ems="10"
 		        android:layout_marginTop="2dp"
-		        android:maxWidth="200dp"
+		        android:completionThreshold="1"
+		        android:ems="10"
 		        android:hint="@string/na"
+		        android:imeOptions="actionDone"
 		        android:lines="1"
+		        android:maxWidth="200dp"
 		        android:singleLine="true"
-		        android:textColor="@color/black"
-		        android:completionThreshold="1" />
+		        android:textColor="@color/black" />
 		    	
 		    <Button
 		        android:id="@+id/find_vehicle_b"
@@ -97,4 +99,34 @@
 	        android:text="@string/no_internet"
 	        />
 	</ScrollView>
+	<ScrollView
+        android:id="@+id/loading_sv"
+        android:layout_below="@+id/actionbar_ll"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" >
+	    <LinearLayout android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical"
+	        android:padding="10dp">
+	    
+	    <TextView
+		    android:id="@+id/loading_tv"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:gravity="center"
+		    android:text="@string/main_loading" />
+	    
+	    <ProgressBar
+	        android:id="@+id/loading_pb"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:indeterminate="true"
+	        android:layout_gravity="center" />
+	    
+	    </LinearLayout>
+	</ScrollView>
+
+	
+
 </RelativeLayout>
