@@ -3,11 +3,16 @@
  */
 package com.yatayat.android.service;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import android.util.Log;
 
 import com.yatayat.android.models.Route;
 import com.yatayat.android.models.Stop;
@@ -20,8 +25,12 @@ import com.yatayat.android.utils.YatayatConstants;
  * @filename YatayatService.java
  */
 public class YatayatService {
+	static String YY_TAG = "com.yatayat.android.service.YatayatService";
+	static String YATAYAT_ = "YatayatService";
 	private static List<Route> routes = null;
 	private static List<Stop> stops = null;
+	private static Set<Stop> stopsSet;
+	private static ArrayList<Stop> uniqueStops;
 
 	public static List<Route> getAllRoute() {
 		return routes;
@@ -32,7 +41,7 @@ public class YatayatService {
 	}
 
 	public static List<Stop> getStops() {
-		return stops;
+		return uniqueStops;
 	}
 
 	public static void setStops(List<Stop> allStops) {
@@ -40,7 +49,8 @@ public class YatayatService {
 	}
 
 	public static void init() {
-
+		stops = new ArrayList<Stop>();
+		routes = new ArrayList<Route>();
 		String jsonString = JsonParser
 				.parseJSON(YatayatConstants.ROUTES_LIST_URL);
 
@@ -60,29 +70,37 @@ public class YatayatService {
 				route.setRef(routeObj.getString("ref"));
 				route.setTransport(routeObj.getString("transport"));
 				String stopsJson = routeObj.getString("stops");
-				// System.out.println(stopsJson);
+				Log.i(YATAYAT_, stopsJson);
 				JSONArray stopsArray = new JSONArray(stopsJson);
 				if (stopsArray.length() > 0) {
+					Log.i("LENGTH_OF_STOPS",
+							String.valueOf(stopsArray.length()));
 					for (int j = 0; j < stopsArray.length(); j++) {
+						Log.i("COUNTER" + j, j + "");
 						Stop stop = new Stop();
 						JSONObject stopObject = stopsArray.getJSONObject(j);
 						if (stopObject.has("id")) {
+							Log.i("ID", (stopObject.getString("id")));
 							stop.setId(Long.parseLong(stopObject
 									.getString("id")));
 						}
 						if (stopObject.has("name")) {
+							Log.i("NAME", (stopObject.getString("name")));
 							stop.setName(stopObject.getString("name"));
 						}
 						if (stopObject.has("lat")) {
+							Log.i("LAT", (stopObject.getString("lat")));
 							stop.setLat(Double.parseDouble(stopObject
-									.getString("name")));
+									.getString("lat")));
 						}
 						if (stopObject.has("lng")) {
+							Log.i("LNG", (stopObject.getString("lng")));
 							stop.setLng(Double.parseDouble(stopObject
 									.getString("lng")));
 						}
-
+						Log.i("ADDING", "ADDING");
 						stops.add(stop);
+						Log.i("ADDED", "ADDED");
 					}
 				}
 				/* end of stops loop */
@@ -92,6 +110,8 @@ public class YatayatService {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+		stopsSet = new HashSet(stops);
+		uniqueStops = new ArrayList(stopsSet);
 		// return routes;
 
 	}
