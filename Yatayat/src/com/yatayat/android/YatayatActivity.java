@@ -2,13 +2,14 @@ package com.yatayat.android;
 
 /**
  * @author         prayag
- * @created_date   15th July 2012 
+ * @created_date   15th July 2012
+ * @lastmodified   20 Jul 2012 
  */
 import java.util.ArrayList;
-import java.util.List;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
@@ -23,7 +24,7 @@ public class YatayatActivity extends Activity {
 
 	private AutoCompleteTextView startPoint, endPoint;
 	private ScrollView mainSV, noInternetSV, progressSV;
-	private List<Stop> stopsList;
+	private ArrayList<Stop> stopsList;
 	private StopArrayAdaptor stopArrayAdaptor;
 
 	@Override
@@ -32,7 +33,9 @@ public class YatayatActivity extends Activity {
 		setContentView(R.layout.activity_yatayat);
 
 		stopsList = new ArrayList<Stop>();
-		// if YES connection
+		/**
+		 * CHECK CONNECTIVITY
+		 */
 		if (YatayatUtility.checkInternetConnection(this)) {
 			progressSV = (ScrollView) findViewById(R.id.loading_sv);
 			progressSV.setVisibility(View.VISIBLE);
@@ -66,8 +69,7 @@ public class YatayatActivity extends Activity {
 
 		@Override
 		public void run() {
-			YatayatService.init();
-			stopsList = YatayatService.getStops();
+			stopsList = YatayatService.getAllStops();
 			runOnUiThread(returnResponse);
 		}
 	};
@@ -78,7 +80,11 @@ public class YatayatActivity extends Activity {
 			if (stopsList != null && stopsList.size() > 0) {
 				for (int i = 0; i < stopsList.size(); i++) {
 					stopArrayAdaptor.add(stopsList.get(i));
+					int coun_ = stopArrayAdaptor.getCount();
+					// Log.i("COUNT_ADDING_TO_ADAPTER", "" + coun_);
 				}
+				Log.i("COUNT_ADDED_TO_ADAPTER",
+						"" + stopArrayAdaptor.getCount() + "");
 			}
 
 			if (progressSV.getVisibility() == View.VISIBLE) {
