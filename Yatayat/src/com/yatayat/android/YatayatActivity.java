@@ -1,7 +1,7 @@
 package com.yatayat.android;
 
 /**
- * @author         prayag
+ * @author prayag
  * @created_date   15th July 2012 
  */
 import java.util.ArrayList;
@@ -64,7 +64,6 @@ public class YatayatActivity extends Activity {
 
 	private final Runnable loadStops = new Runnable() {
 
-		@Override
 		public void run() {
 			YatayatService.init();
 			stopsList = YatayatService.getStops();
@@ -73,7 +72,6 @@ public class YatayatActivity extends Activity {
 	};
 	private final Runnable returnResponse = new Runnable() {
 
-		@Override
 		public void run() {
 			if (stopsList != null && stopsList.size() > 0) {
 				for (int i = 0; i < stopsList.size(); i++) {
