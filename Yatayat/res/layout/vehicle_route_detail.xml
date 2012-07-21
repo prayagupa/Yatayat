@@ -21,15 +21,20 @@
         android:layout_toRightOf="@+id/vehicle_iv">
 	        
 	    <TextView
-	        android:id="@+id/vehicle_tv"
+	        android:id="@+id/vehicle_transport_tv"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:textStyle="bold"
 	        android:textSize="18sp"
 	        android:text="Something Yatayat" />
+	    <TextView 
+	        android:id="@+id/vehicle_ref_tv"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="14 number tampo" />
 	    
 	    <TextView
-	        android:id="@+id/vehicle_route"
+	        android:id="@+id/vehicle_route_tv"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:textSize="12sp"

@@ -14,17 +14,18 @@ public final class R {
         public static final int app_color=0x7f040000;
         public static final int bg=0x7f040001;
         public static final int black=0x7f040003;
-        public static final int button_border=0x7f040008;
-        public static final int button_border_selected=0x7f040009;
-        public static final int button_text=0x7f040007;
-        public static final int darkBgButton=0x7f04000c;
-        public static final int darkBlue=0x7f040006;
-        public static final int lightBgButton=0x7f04000a;
+        public static final int button_border=0x7f040009;
+        public static final int button_border_selected=0x7f04000a;
+        public static final int button_text=0x7f040008;
+        public static final int darkBgButton=0x7f04000d;
+        public static final int darkBlue=0x7f040007;
+        public static final int lightBgButton=0x7f04000b;
         /**  Action Bar and Buttons 
          */
-        public static final int lightBlue=0x7f040004;
-        public static final int mediumBgButton=0x7f04000b;
-        public static final int mediumBlue=0x7f040005;
+        public static final int lightBlue=0x7f040005;
+        public static final int mediumBgButton=0x7f04000c;
+        public static final int mediumBlue=0x7f040006;
+        public static final int transparent=0x7f040004;
         public static final int white=0x7f040002;
     }
     public static final class dimen {
@@ -43,31 +44,37 @@ public final class R {
         public static final int logo_actionbar=0x7f020007;
     }
     public static final class id {
-        public static final int actionbar=0x7f090001;
-        public static final int actionbar_ll=0x7f090000;
-        public static final int actionbar_rl=0x7f09000b;
-        public static final int actionbar_tv=0x7f09000c;
-        public static final int end_point_et=0x7f090004;
-        public static final int find_vehicle_b=0x7f090005;
-        public static final int loading_pb=0x7f090009;
-        public static final int loading_sv=0x7f090007;
-        public static final int loading_tv=0x7f090008;
-        public static final int location_list_detail_tv=0x7f09000a;
-        public static final int main_sv=0x7f090002;
-        public static final int menu_settings=0x7f090011;
-        public static final int no_internet_sv=0x7f090006;
-        public static final int start_point_et=0x7f090003;
-        public static final int suggestionlist_tv=0x7f09000d;
-        public static final int vehicle_iv=0x7f09000e;
-        public static final int vehicle_route=0x7f090010;
-        public static final int vehicle_tv=0x7f09000f;
+        public static final int actionbar=0x7f090002;
+        public static final int actionbar_ll=0x7f090001;
+        public static final int actionbar_rl=0x7f09000f;
+        public static final int actionbar_tv=0x7f090010;
+        public static final int activity_routelist_loading_ll=0x7f090003;
+        public static final int activity_routelist_lv=0x7f090005;
+        public static final int activity_routelist_rr=0x7f090000;
+        public static final int end_point_et=0x7f090008;
+        public static final int find_vehicle_b=0x7f090009;
+        public static final int loading_pb=0x7f09000d;
+        public static final int loading_sv=0x7f09000b;
+        public static final int loading_tv=0x7f09000c;
+        public static final int location_list_detail_tv=0x7f09000e;
+        public static final int main_sv=0x7f090006;
+        public static final int menu_settings=0x7f090016;
+        public static final int no_internet_sv=0x7f09000a;
+        public static final int progressBar1=0x7f090004;
+        public static final int start_point_et=0x7f090007;
+        public static final int suggestionlist_tv=0x7f090011;
+        public static final int vehicle_iv=0x7f090012;
+        public static final int vehicle_ref_tv=0x7f090014;
+        public static final int vehicle_route_tv=0x7f090015;
+        public static final int vehicle_transport_tv=0x7f090013;
     }
     public static final class layout {
-        public static final int activity_yatayat=0x7f030000;
-        public static final int locaiton_list_detail=0x7f030001;
-        public static final int merge_actionbar=0x7f030002;
-        public static final int suggestionlist=0x7f030003;
-        public static final int vehicle_route_detail=0x7f030004;
+        public static final int activity_routelist=0x7f030000;
+        public static final int activity_yatayat=0x7f030001;
+        public static final int locaiton_list_detail=0x7f030002;
+        public static final int merge_actionbar=0x7f030003;
+        public static final int suggestionlist=0x7f030004;
+        public static final int vehicle_route_detail=0x7f030005;
     }
     public static final class menu {
         public static final int activity_yatayat=0x7f080000;
@@ -87,6 +94,7 @@ public final class R {
         public static final int menu_settings=0x7f060002;
         public static final int na=0x7f060007;
         public static final int no_internet=0x7f060008;
+        public static final int route_loading=0x7f06000a;
         public static final int start_point=0x7f060004;
         public static final int title_activity_yatayat=0x7f060003;
     }

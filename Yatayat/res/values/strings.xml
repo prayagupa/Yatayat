@@ -18,5 +18,6 @@
     <string name="no_internet">Please connect to internet\!</string>
     
     <string name="main_loading">Loading data from server\.\.\.</string>
+    <string name="route_loading">Loading avilable vehicles</string>
 
 </resources>
