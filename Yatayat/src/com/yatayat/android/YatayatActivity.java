@@ -8,15 +8,18 @@ package com.yatayat.android;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.ScrollView;
 
 import com.yatayat.android.models.Stop;
 import com.yatayat.android.service.YatayatService;
+import com.yatayat.android.test.Test;
 import com.yatayat.android.utils.YatayatUtility;
 import com.yatayat.android.widgets.StopArrayAdaptor;
 
@@ -26,6 +29,7 @@ public class YatayatActivity extends Activity {
 	private ScrollView mainSV, noInternetSV, progressSV;
 	private ArrayList<Stop> stopsList;
 	private StopArrayAdaptor stopArrayAdaptor;
+	private Button takeMeThere;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -52,6 +56,21 @@ public class YatayatActivity extends Activity {
 
 			Thread thread = new Thread(null, loadStops);
 			thread.start();
+
+			takeMeThere = (Button) findViewById(R.id.find_vehicle_b);
+			takeMeThere.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					Test test = new Test();
+					Intent intent = new Intent();
+					intent.putExtra("startStopID", test.getStartStopID());
+					intent.putExtra("goalStopID", test.getGoalStopID());
+					intent.setClass(YatayatActivity.this,
+							RouteListActivity.class);
+					startActivity(intent);
+				}
+			});
 		} else {
 			mainSV = (ScrollView) findViewById(R.id.no_internet_sv);
 			mainSV.setVisibility(View.VISIBLE);
@@ -80,11 +99,7 @@ public class YatayatActivity extends Activity {
 			if (stopsList != null && stopsList.size() > 0) {
 				for (int i = 0; i < stopsList.size(); i++) {
 					stopArrayAdaptor.add(stopsList.get(i));
-					int coun_ = stopArrayAdaptor.getCount();
-					// Log.i("COUNT_ADDING_TO_ADAPTER", "" + coun_);
 				}
-				Log.i("COUNT_ADDED_TO_ADAPTER",
-						"" + stopArrayAdaptor.getCount() + "");
 			}
 
 			if (progressSV.getVisibility() == View.VISIBLE) {
