@@ -45,4 +45,14 @@ public class Stop {
 		this.lng = lng;
 	}
 
+	@Override
+	public boolean equals(Object stopObj) {
+		boolean flag = false;
+		Stop stop = (Stop) stopObj;
+		if (stop.id == id && stop.name.equalsIgnoreCase(name)
+				&& stop.lat == lat && stop.lng == lng) {
+			flag = true;
+		}
+		return flag;
+	}
 }

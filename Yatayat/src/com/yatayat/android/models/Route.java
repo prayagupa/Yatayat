@@ -13,8 +13,7 @@ import java.util.List;
 public class Route {
 	private long id;
 	private String name;
-	private String ref;
-	private String transport;
+	private Vehicle vehicle;
 	private List<Stop> stops;
 
 	public long getId() {
@@ -33,20 +32,12 @@ public class Route {
 		this.name = name;
 	}
 
-	public String getRef() {
-		return ref;
+	public Vehicle getVehicle() {
+		return vehicle;
 	}
 
-	public void setRef(String ref) {
-		this.ref = ref;
-	}
-
-	public String getTransport() {
-		return transport;
-	}
-
-	public void setTransport(String transport) {
-		this.transport = transport;
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
 	}
 
 	public List<Stop> getStops() {
