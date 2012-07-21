@@ -22,39 +22,41 @@ import com.yatayat.android.models.Stop;
 /**
  * @author prayag
  * @created 17 Jul 2012
+ * @lastmodified 20 Jul 2012
  * @filename YatayatArrayAdaptor.java
  */
 public class StopArrayAdaptor extends ArrayAdapter<Stop> {
-	private final LayoutInflater mInflater;
-	List<String> resultsSuggestions;
+	private final LayoutInflater mLayoutInflater;
+	ArrayList<Stop> resultsSuggestions;
 
 	private class ViewHolder {
 		TextView suggestionText;
 	}
 
-	public StopArrayAdaptor(Activity activity, List<Stop> objects) {
-		super(activity, R.layout.suggestionlist, objects);
-		this.mInflater = (LayoutInflater) activity
+	public StopArrayAdaptor(Activity activity, List<Stop> stops) {
+		super(activity, R.layout.suggestionlist, stops);
+		this.mLayoutInflater = (LayoutInflater) activity
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		resultsSuggestions = new ArrayList<String>();
+		resultsSuggestions = new ArrayList<Stop>();
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parents) {
-		View item = convertView;
+		View itemView = convertView;
 		ViewHolder holder = null;
-		if (item == null) {
-			item = mInflater.inflate(R.layout.suggestionlist, parents, false);
+		if (itemView == null) {
+			itemView = mLayoutInflater.inflate(R.layout.suggestionlist,
+					parents, false);
 			holder = new ViewHolder();
-			holder.suggestionText = (TextView) item
+			holder.suggestionText = (TextView) itemView
 					.findViewById(R.id.suggestionlist_tv);
-			item.setTag(holder);
+			itemView.setTag(holder);
 		}
 
 		Stop stop = getItem(position);
-		holder = (ViewHolder) item.getTag();
+		holder = (ViewHolder) itemView.getTag();
 		holder.suggestionText.setText(stop.getName());
-		return item;
+		return itemView;
 	}
 
 	@Override
@@ -63,12 +65,26 @@ public class StopArrayAdaptor extends ArrayAdapter<Stop> {
 
 			@Override
 			protected FilterResults performFiltering(CharSequence constraint) {
+				Log.i("GET_COUNT_ARRAY_ADAPTER", getCount() + "");
 				for (int i = 0; i < getCount(); i++) {
-					if (getItem(i).getName().startsWith(constraint.toString())) {
-						Log.i("NAME", getItem(i).getName());
-
-						resultsSuggestions.add(getItem(i).getName());
+					Log.i("NAME_INSIDE_FOR_LOOP", getItem(i).getName());
+					if (getItem(i).getName() != null) {
+						if (getItem(i)
+								.getName()
+								.toLowerCase()
+								.startsWith(constraint.toString().toLowerCase())) {
+							Log.i("NAME", getItem(i).getName());
+							if (resultsSuggestions != null)
+								resultsSuggestions.add(getItem(i));
+							else
+								resultsSuggestions = new ArrayList<Stop>();
+							// resultsSuggestions.add(getItem(i).getName());
+							Log.i("AFTER_ADDING_RESULT_SUGGESTION_" + i,
+									"AFTER_ADDING_RESULT_SUGGESTION_" + i);
+						}
+						Log.i("NOT_NULL_" + i, "NOT_NULL_" + i);
 					}
+
 				}
 				Log.i("SUGGESTED RESULT SIZE", "" + resultsSuggestions.size());
 				FilterResults filterResults = new FilterResults();
