@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.yatayat.android.R;
@@ -25,9 +26,9 @@ import com.yatayat.android.models.Stop;
  * @lastmodified 20 Jul 2012
  * @filename YatayatArrayAdaptor.java
  */
-public class StopArrayAdaptor extends ArrayAdapter<Stop> {
+public class StopArrayAdaptor extends ArrayAdapter<Stop> implements Filterable {
 	private final LayoutInflater mLayoutInflater;
-	ArrayList<Stop> resultsSuggestions;
+	private ArrayList<Stop> mStopSuggestions;
 
 	private class ViewHolder {
 		TextView suggestionText;
@@ -37,31 +38,39 @@ public class StopArrayAdaptor extends ArrayAdapter<Stop> {
 		super(activity, R.layout.suggestionlist, stops);
 		this.mLayoutInflater = (LayoutInflater) activity
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		resultsSuggestions = new ArrayList<Stop>();
+		mStopSuggestions = new ArrayList<Stop>();
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parents) {
 		View itemView = convertView;
-		ViewHolder holder = null;
+		ViewHolder viewHolder = null;
 		if (itemView == null) {
 			itemView = mLayoutInflater.inflate(R.layout.suggestionlist,
 					parents, false);
-			holder = new ViewHolder();
-			holder.suggestionText = (TextView) itemView
+			viewHolder = new ViewHolder();
+			viewHolder.suggestionText = (TextView) itemView
 					.findViewById(R.id.suggestionlist_tv);
-			itemView.setTag(holder);
+			itemView.setTag(viewHolder);
 		}
 
 		Stop stop = getItem(position);
-		holder = (ViewHolder) itemView.getTag();
-		holder.suggestionText.setText(stop.getName());
+		viewHolder = (ViewHolder) itemView.getTag();
+		viewHolder.suggestionText.setText(stop.getName());
 		return itemView;
 	}
 
 	@Override
 	public Filter getFilter() {
 		Filter stopFilter = new Filter() {
+
+			@Override
+			public String convertResultToString(Object resultValue) {
+				String TAG = "CONVERT_RESULT_TO_STRING";
+				Log.i(TAG, "convertResultToString");
+				Stop s = (Stop) resultValue;
+				return s.getName();
+			}
 
 			@Override
 			protected FilterResults performFiltering(CharSequence constraint) {
@@ -74,10 +83,10 @@ public class StopArrayAdaptor extends ArrayAdapter<Stop> {
 								.toLowerCase()
 								.startsWith(constraint.toString().toLowerCase())) {
 							Log.i("NAME", getItem(i).getName());
-							if (resultsSuggestions != null)
-								resultsSuggestions.add(getItem(i));
+							if (mStopSuggestions != null)
+								mStopSuggestions.add(getItem(i));
 							else
-								resultsSuggestions = new ArrayList<Stop>();
+								mStopSuggestions = new ArrayList<Stop>();
 							// resultsSuggestions.add(getItem(i).getName());
 							Log.i("AFTER_ADDING_RESULT_SUGGESTION_" + i,
 									"AFTER_ADDING_RESULT_SUGGESTION_" + i);
@@ -86,14 +95,14 @@ public class StopArrayAdaptor extends ArrayAdapter<Stop> {
 					}
 
 				}
-				Log.i("SUGGESTED RESULT SIZE", "" + resultsSuggestions.size());
+				Log.i("SUGGESTED RESULT SIZE", "" + mStopSuggestions.size());
 				FilterResults filterResults = new FilterResults();
 				Log.i("RESULT", "RESULT");
 				if (filterResults != null) {
 					Log.i(" BEFORE SETTING VALUE", " BEFORE SETTING VALUE");
-					filterResults.values = resultsSuggestions;
+					filterResults.values = mStopSuggestions;
 					Log.i("RESULT VALUE", filterResults.values.toString());
-					filterResults.count = resultsSuggestions.size();
+					filterResults.count = mStopSuggestions.size();
 				}
 
 				return filterResults;
@@ -104,13 +113,13 @@ public class StopArrayAdaptor extends ArrayAdapter<Stop> {
 			protected void publishResults(CharSequence constraint,
 					FilterResults filterResults) {
 				clear();
-				Log.i("BEFORE CASTING", "BEFORE CASTING");
-				ArrayList<Stop> newValues = (ArrayList<Stop>) filterResults.values;
-				Log.i("AFTER CASTING", "AFTER CASTING");
-				if (newValues != null) {
-					for (int i = 0; i < newValues.size(); i++) {
+				Log.i("BEFORE_CASTING_FILTER_VALUES", "BEFORE CASTING");
+				ArrayList<Stop> filteredStops = (ArrayList<Stop>) filterResults.values;
+				Log.i("AFTER_CASTING_FILTER_VALUES", "AFTER CASTING");
+				if (filteredStops != null) {
+					for (int i = 0; i < filteredStops.size(); i++) {
 						Log.i("ADDING", "ADDING NEW VALUE");
-						add(newValues.get(i));
+						add(filteredStops.get(i));
 						Log.i("ADDED", "ADDED NEW VALUE");
 					}
 					if (filterResults.count > 0) {
