@@ -112,7 +112,7 @@ public class YatayatService {
 	}
 
 	public static ArrayList<Stop> getAllStops() {
-		ArrayList<Stop> stops = new ArrayList<Stop>();
+		ArrayList<Stop> stopsList = new ArrayList<Stop>();
 		String yatayatResponse = JsonParser
 				.parseJSON(YatayatConstants.STOPS_LIST_URL);
 		try {
@@ -141,15 +141,15 @@ public class YatayatService {
 							stop.setLng(Double.parseDouble(stopObject
 									.getString("lng")));
 						}
-						boolean alreadyExists = false;
-						for (Stop s : stops) {
-							if (stop.equals(s)) {
-								alreadyExists = true;
-								break;
-							}
-						}
+						boolean alreadyExists = true;
+						// for (Stop s : stopsList) {
+						// if (stop.equals(s)) {
+						// alreadyExists = true;
+						// break;
+						// }
+						// }
 						if (alreadyExists) {
-							stops.add(stop);
+							stopsList.add(stop);
 						}
 
 					}
@@ -160,7 +160,8 @@ public class YatayatService {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		return stops;
+		Log.i("SIZE_OF_STOP_LIST", "" + stopsList.size());
+		return stopsList;
 	}
 
 	public static List<Route> getAllRoutes(String jsonString_) {
