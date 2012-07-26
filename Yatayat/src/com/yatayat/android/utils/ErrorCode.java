@@ -9,5 +9,5 @@ package com.yatayat.android.utils;
  * @filename ErrorCode.java
  */
 public class ErrorCode {
-	public static final String NO_ROUTES_FOUND = "no routes found";
+	public static final String NO_ROUTES_FOUND = "No route found";
 }

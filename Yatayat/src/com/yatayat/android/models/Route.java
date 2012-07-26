@@ -3,7 +3,7 @@
  */
 package com.yatayat.android.models;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * @author prayag
@@ -14,7 +14,7 @@ public class Route {
 	private long id;
 	private String name;
 	private Vehicle vehicle;
-	private List<Stop> stops;
+	private ArrayList<Stop> stops;
 
 	public long getId() {
 		return id;
@@ -40,11 +40,11 @@ public class Route {
 		this.vehicle = vehicle;
 	}
 
-	public List<Stop> getStops() {
+	public ArrayList<Stop> getStops() {
 		return stops;
 	}
 
-	public void setStops(List<Stop> stops) {
+	public void setStops(ArrayList<Stop> stops) {
 		this.stops = stops;
 	}
 

@@ -31,7 +31,7 @@ public class YatayatService {
 	static String TAG_YATAYAT_SERVICE = "com.yatayat.android.service.YatayatService";
 	static String YATAYAT_SERVICE = "YatayatService";
 	private static List<Route> routes = null;
-	private static List<Stop> stops = null;
+	private static ArrayList<Stop> stops = null;
 	private static Set<Stop> stopsSet;
 	private static ArrayList<Stop> uniqueStops;
 
@@ -39,7 +39,7 @@ public class YatayatService {
 		return routes;
 	}
 
-	public static void setRoute(List<Route> allRoute) {
+	public static void setRoute(ArrayList<Route> allRoute) {
 		YatayatService.routes = allRoute;
 	}
 
@@ -47,7 +47,7 @@ public class YatayatService {
 		return uniqueStops;
 	}
 
-	public static void setStops(List<Stop> allStops) {
+	public static void setStops(ArrayList<Stop> allStops) {
 		YatayatService.stops = allStops;
 	}
 
@@ -109,6 +109,16 @@ public class YatayatService {
 		uniqueStops = new ArrayList(stopsSet);
 		// return routes;
 
+	}
+
+	public static ArrayList<String> getAllStopsList() {
+		ArrayList<String> stopsList = new ArrayList<String>();
+		stops = YatayatService.getAllStops();
+
+		for (Stop stop : stops) {
+			stopsList.add(stop.getName());
+		}
+		return stopsList;
 	}
 
 	public static ArrayList<Stop> getAllStops() {
@@ -258,24 +268,26 @@ public class YatayatService {
 		ArrayList<Route> routes = new ArrayList<Route>();
 		String takeMeThere = YatayatConstants.TAKE_ME_THERE_URL
 				+ "?startStopID=" + startStopID + "&goalStopID=" + goalStopID;
+		Log.i("TAKE_ME_THERE_URL", takeMeThere);
 		String yatayatResponse = JsonParser.parseJSON(takeMeThere);
 		Log.i(TAKE_ME_THERE, yatayatResponse);
 
-		if (yatayatResponse.equals(ErrorCode.NO_ROUTES_FOUND)) {
+		if (yatayatResponse.equalsIgnoreCase(ErrorCode.NO_ROUTES_FOUND)) {
 			return null;
-		}
-		routes = YatayatService.convertToRoutes(yatayatResponse);
+		} else {
+			routes = YatayatService.convertToRoutes(yatayatResponse);
 
-		return routes;
+			return routes;
+		}
 	}
 
 	public static ArrayList<Route> convertToRoutes(String yatayatResponse) {
 		ArrayList<Route> routes = new ArrayList<Route>();
 		try {
-			JSONObject parentObject = new JSONObject(yatayatResponse);
+			// JSONObject parentObject = new JSONObject(yatayatResponse);
 
-			String json = parentObject.getString("routes");
-			JSONArray routesArray = new JSONArray(json);
+			// String json = parentObject.getString("routes");
+			JSONArray routesArray = new JSONArray(yatayatResponse);
 
 			for (int i = 0; i < routesArray.length(); i++) {
 				JSONObject routeObj = routesArray.getJSONObject(i);
@@ -291,6 +303,7 @@ public class YatayatService {
 				String stopsJson = routeObj.getString("stops");
 				JSONArray stopsArray = new JSONArray(stopsJson);
 				if (stopsArray.length() > 0) {
+					Log.i("ADDING_?_STOS_TO_ROUTE", "" + stopsArray.length());
 					for (int j = 0; j < stopsArray.length(); j++) {
 						Stop stop = new Stop();
 						JSONObject stopObject = stopsArray.getJSONObject(j);
@@ -303,7 +316,7 @@ public class YatayatService {
 						}
 						if (stopObject.has("lat")) {
 							stop.setLat(Double.parseDouble(stopObject
-									.getString("name")));
+									.getString("lat")));
 						}
 						if (stopObject.has("lng")) {
 							stop.setLng(Double.parseDouble(stopObject
@@ -322,5 +335,24 @@ public class YatayatService {
 		}
 
 		return routes;
+	}
+
+	public static long findByStopName(String fromStop) {
+
+		for (Stop stop : stops) {
+			if (fromStop.equalsIgnoreCase(stop.getName())) {
+				return stop.getId();
+			}
+		}
+		return 0;
+	}
+
+	public static Stop findStopByStopName(String fromStop) {
+		for (Stop stop : stops) {
+			if (fromStop.equalsIgnoreCase(stop.getName())) {
+				return stop;
+			}
+		}
+		return null;
 	}
 }
