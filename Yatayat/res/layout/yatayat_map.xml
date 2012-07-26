@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <LinearLayout 
+        android:id="@+id/actionbar_ll"
+        android:layout_alignParentTop="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+    	<include android:id="@+id/actionbar" layout="@layout/merge_actionbar" />
+    </LinearLayout>
+    
+    <com.mapquest.android.maps.MapView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/map"
+    android:layout_below="@+id/actionbar_ll"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:clickable="true"
+    android:apiKey="YOUR_APPKEY_HERE"
+  />
+
+</RelativeLayout>
