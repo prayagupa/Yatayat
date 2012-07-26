@@ -41,7 +41,9 @@ public final class R {
         public static final int ic_action_search=0x7f020004;
         public static final int ic_launcher=0x7f020005;
         public static final int info=0x7f020006;
-        public static final int logo_actionbar=0x7f020007;
+        public static final int location_marker=0x7f020007;
+        public static final int location_marker_end=0x7f020008;
+        public static final int logo_actionbar=0x7f020009;
     }
     public static final class id {
         public static final int actionbar=0x7f090002;
@@ -58,7 +60,8 @@ public final class R {
         public static final int loading_tv=0x7f09000c;
         public static final int location_list_detail_tv=0x7f09000e;
         public static final int main_sv=0x7f090006;
-        public static final int menu_settings=0x7f090016;
+        public static final int map=0x7f090016;
+        public static final int menu_settings=0x7f090017;
         public static final int no_internet_sv=0x7f09000a;
         public static final int progressBar1=0x7f090004;
         public static final int start_point_et=0x7f090007;
@@ -75,6 +78,7 @@ public final class R {
         public static final int merge_actionbar=0x7f030003;
         public static final int suggestionlist=0x7f030004;
         public static final int vehicle_route_detail=0x7f030005;
+        public static final int yatayat_map=0x7f030006;
     }
     public static final class menu {
         public static final int activity_yatayat=0x7f080000;
