@@ -24,6 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".RouteListActivity"/>
+        <activity android:name=".YatayatMapActivity"/>
     </application>
 
 </manifest>
