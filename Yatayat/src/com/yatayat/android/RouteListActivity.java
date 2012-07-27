@@ -53,7 +53,8 @@ public class RouteListActivity extends Activity {
 		startStopID = bundle.getLong("startStopID");
 		goalStopID = bundle.getLong("goalStopID");
 
-		startLat = Double.valueOf(bundle.getString("startLat"));
+		// startLat = Double.valueOf(bundle.getString("startLat"));
+		startLat = bundle.getDouble("startLat");
 		startLng = bundle.getDouble("startLng");
 
 		goalLat = bundle.getDouble("goalLat");
@@ -72,42 +73,16 @@ public class RouteListActivity extends Activity {
 				Log.i("id", "" + id);
 				Route selectedRoute = routeList.get(position);
 				Log.i("ROUTE_NAME", selectedRoute.getName());
-				// ArrayList<Stop> stops = selectedRoute.getStops();
-				// Log.i("SIZE_OF_STOPS", stops.size() + "");
-				// Stop stop = stops.get(0);
-				// double d = stop.getLat();
-				// Log.i("___", d + "");
-				//
+				Bundle bundle = new Bundle();
+				bundle.putDouble("startLat", startLat);
+				bundle.putDouble("startLng", startLng);
+				bundle.putDouble("goalLat", goalLat);
+				bundle.putDouble("goalLng", goalLng);
+
 				Intent intent = new Intent();
-				// intent.putExtra("startLat", String.valueOf(selectedRoute
-				// .getStops().get(0).getLat()));
-				//
-				// intent.putExtra("startLng", String.valueOf(selectedRoute
-				// .getStops().get(0).getLng()));
-				//
-				// intent.putExtra(
-				// "goalLat",
-				// String.valueOf(selectedRoute.getStops()
-				// .get(selectedRoute.getStops().size() - 1)
-				// .getLat()));
-				// intent.putExtra(
-				// "goalLng",
-				// String.valueOf(selectedRoute.getStops()
-				// .get(selectedRoute.getStops().size() - 1)
-				// .getLng()));
-				//
-				// intent.putExtra("routeName",
-				// String.valueOf(selectedRoute.getName()));
-				intent.putExtra("startLat", String.valueOf(startLat));
-				Log.i("LAT_ROUTELIST_ACTIVITY", String.valueOf(startLat));
-				intent.putExtra("startLng", String.valueOf(startLng));
-
-				intent.putExtra("goalLat", String.valueOf(goalLat));
-
-				intent.putExtra("goalLng", String.valueOf(goalLng));
-
 				intent.setClass(RouteListActivity.this,
 						YatayatMapActivity.class);
+				intent.putExtras(bundle);
 				startActivity(intent);
 
 			}
