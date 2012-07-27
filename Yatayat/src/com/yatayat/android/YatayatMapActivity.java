@@ -3,11 +3,11 @@ package com.yatayat.android;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.mapquest.android.maps.DefaultItemizedOverlay;
 import com.mapquest.android.maps.GeoPoint;
@@ -18,8 +18,7 @@ import com.mapquest.android.maps.OverlayItem;
 
 public class YatayatMapActivity extends MapActivity {
 	MapView map;
-	int startLat, startLng, goalLat, goalLng;
-	String routeName, startAddress, endAddress;
+	double startLat, startLng, goalLat, goalLng;
 	final String MODE = "deploy";// test, deploy
 
 	@Override
@@ -27,39 +26,17 @@ public class YatayatMapActivity extends MapActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.yatayat_map);
 
-		Bundle bundle = getIntent().getExtras();
+		Intent inIntent = getIntent();
+		startLat = inIntent.getExtras().getDouble("startLat");
+		startLng = inIntent.getExtras().getDouble("startLng");
+		goalLat = inIntent.getExtras().getDouble("goalLat");
+		goalLng = inIntent.getExtras().getDouble("goalLng");
+		Log.i("LIN_LAT", "" + startLat + " " + startLng);
 
 		map = (MapView) findViewById(R.id.map);
 		map.getController().setZoom(12);
-		map.getController().setCenter(new GeoPoint(27.705665, 85.322869));
+		map.getController().setCenter(new GeoPoint(startLat, startLng));
 		map.setBuiltInZoomControls(true);
-
-		/**
- * 
- */
-		if (MODE == "test") {
-			// startLat = 27.705665;
-			// startLng = 85.322869;
-			// goalLat = 27.678869;
-			// goalLng = 85.349711;
-
-			routeName = "Putalisadak-Koteshwor";
-			startAddress = "Putalisadak";
-			endAddress = "Koteshwor";
-		} else {
-			startLat = (int) (bundle.getDouble("startLat") * 1E6);
-			startLng = (int) (bundle.getDouble("startLng") * 1E6);
-			goalLat = (int) (bundle.getDouble("goalLat") * 1E6);
-			goalLng = (int) (bundle.getDouble("goalLng") * 1E6);
-			Log.i("startLat", "" + bundle.getDouble("startLat"));
-			Log.i("LIN_LAT", "" + startLat + " " + startLng);
-
-			// startLat = (int) (bundle.getDouble("startLat") * 1E6);
-			// startLng = (int) (bundle.getDouble("startLng") * 1E6);
-			// goalLat = (int) (bundle.getDouble("goalLat") * 1E6);
-			// goalLng = (int) (bundle.getDouble("goalLng") * 1E6);
-			// routeName = bundle.getString("routeName");
-		}
 
 		showPinOverley();
 		showRouteOverley();
@@ -87,13 +64,10 @@ public class YatayatMapActivity extends MapActivity {
 
 		LineOverlay line = new LineOverlay(paint);
 		line.setData(routeData);
-		line.setKey(routeName);
 
 		line.setTapListener(new LineOverlay.OverlayTapListener() {
 			@Override
 			public void onTap(GeoPoint gp, MapView mapView) {
-				Toast.makeText(getApplicationContext(), routeName,
-						Toast.LENGTH_SHORT).show();
 			}
 		});
 		this.map.getOverlays().add(line);
@@ -106,12 +80,12 @@ public class YatayatMapActivity extends MapActivity {
 		DefaultItemizedOverlay endOverley = new DefaultItemizedOverlay(
 				getResources().getDrawable(R.drawable.location_marker_end));
 
-		OverlayItem it1 = new OverlayItem(new GeoPoint(startLat, startLng),
-				startAddress, startAddress);
+		OverlayItem it1 = new OverlayItem(new GeoPoint(startLat, startLng), "",
+				"");
 		startOverley.addItem(it1);
 
-		OverlayItem it2 = new OverlayItem(new GeoPoint(goalLat, goalLng),
-				endAddress, endAddress);
+		OverlayItem it2 = new OverlayItem(new GeoPoint(goalLat, goalLng), "",
+				"");
 		endOverley.addItem(it2);
 
 		this.map.getOverlays().add(startOverley);
