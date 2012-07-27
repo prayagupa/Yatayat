@@ -26,7 +26,6 @@ import android.widget.ScrollView;
 
 import com.yatayat.android.models.Stop;
 import com.yatayat.android.service.YatayatService;
-import com.yatayat.android.test.Test;
 import com.yatayat.android.utils.YatayatUtility;
 
 public class YatayatActivity extends Activity {
@@ -165,7 +164,6 @@ public class YatayatActivity extends Activity {
 					goalStopID = goalStopObj.getId();
 					goalLat = goalStopObj.getLat();
 					goalLng = goalStopObj.getLng();
-					Log.i("GOAL_STOP_ID", goalStopID + "");
 				}
 
 			});
@@ -178,24 +176,32 @@ public class YatayatActivity extends Activity {
 				@Override
 				public void onClick(View v) {
 					if (validateStops()) {
-						Test test = new Test();
+						// Test test = new Test();
 						Intent intent = new Intent();
+						Bundle bundle = new Bundle();
+						bundle.putDouble("startLat", startLat);
+						bundle.putDouble("startLng", startLng);
+						bundle.putDouble("goalLat", goalLat);
+						bundle.putDouble("goalLng", goalLng);
+
 						intent.putExtra("startStopID", startStopID);
 						intent.putExtra("goalStopID", goalStopID);
-						/**
-						 * 
-						 */
-						intent.putExtra("startLat", String.valueOf(startLat));
-
-						intent.putExtra("startLng", String.valueOf(startLng));
-
-						intent.putExtra("goalLat", String.valueOf(goalLat));
-
-						intent.putExtra("goalLng", String.valueOf(goalLng));
+						// intent.putExtra("startLat",
+						// String.valueOf(startLat));
+						//
+						// intent.putExtra("startLng",
+						// String.valueOf(startLng));
+						//
+						// intent.putExtra("goalLat", String.valueOf(goalLat));
+						//
+						// intent.putExtra("goalLng", String.valueOf(goalLng));
 
 						intent.setClass(YatayatActivity.this,
 								RouteListActivity.class);
+						intent.putExtras(bundle);
+						Log.i("Here WE ARE", "HERE WE ARE");
 						startActivity(intent);
+						Log.i("Here WE ARE", "HERE WE ARE");
 					}
 				}
 
