@@ -7,5 +7,6 @@ Yatayat is a community based application to assist people finding transport rout
 $ git clone https://github.com/iPrayag/Yatayat
 
 <b>Android app</b>
+
 install it from https://play.google.com/store/apps/details?id=com.goratoworks.yatayat&feature=search_result
 
