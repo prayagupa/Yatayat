@@ -10,3 +10,4 @@ $ git clone https://github.com/iPrayag/Yatayat
 
 install it from https://play.google.com/store/apps/details?id=com.goratoworks.yatayat&feature=search_result
 
+[[/snapshots/yatayat_list_vehicles_pryg.jpg|alt=yatayat_list_vehicles|align=center]]
